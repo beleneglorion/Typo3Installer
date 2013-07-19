@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+if (PHP_SAPI !== 'cli') {
+    echo 'Warning: Composer should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+}
+
+require __DIR__.'/../src/bootstrap.php';
+
+use Symfony\Component\Console\Shell;
+use Symfony\Component\Console\Application;
+use TypoInstaller\Command\Install;
+
+
+$application            = new Application('Installer', '1.0.0-alpha');
+$application->add(new Install());
+$shell = new Shell($application);
+
+$shell->run();
